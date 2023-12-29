@@ -1,7 +1,8 @@
 <!-- ProductDetail.vue -->
 <template>
+  <Nav />
   <div>
-    <h2>{{ product.name }} Detail</h2>
+    <h2>{{ product.name }}</h2>
     <div class="container mt-5 mb-5">
       <div class="row d-flex justify-content-center">
         <div class="col-md-10">
@@ -40,9 +41,13 @@
                   <p class="about">
                     {{ product.description }}
                   </p>
-
+                  <button
+                    class="btn btn-danger text-uppercase mr-2 px-4"
+                    @click="addToCart(product)"
+                  >
+                    Mua
+                  </button>
                   <div class="cart mt-4 align-items-center">
-                
                     <i class="fa fa-heart text-muted"></i>
                     <i class="fa fa-share-alt text-muted"></i>
                   </div>
@@ -54,11 +59,18 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import axios from "axios";
+import Footer from "./footer.vue";
+import Nav from "./nav.vue";
 export default {
+  components: {
+    Nav,
+    Footer,
+  },
   data() {
     return {
       product: {},
@@ -70,6 +82,7 @@ export default {
     const productId = this.$route.params.id;
     this.fetchProduct(productId);
   },
+
   methods: {
     async fetchProduct(productId) {
       try {
@@ -88,5 +101,7 @@ export default {
 </script>
 
 <style scoped>
-/* Your component-specific styles go here */
+.images {
+  margin-right: 500px;
+}
 </style>

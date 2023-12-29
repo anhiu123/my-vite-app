@@ -154,7 +154,7 @@ export default {
         this.productStock = "";
         this.productCategory = "";
         this.productBrand = "";
-        this.$router.push("/products");
+        this.$router.push("/");
       } catch (error) {
         // Xử lý lỗi nếu có
 

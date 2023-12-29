@@ -3,8 +3,8 @@
   <div>
     <h2>Ứng Dụng Bán Quần Áo</h2>
 
-    <div class="addd"><a class="add" href="/add">Thêm Sản Phẩm</a></div>
-    <br>
+    <div class="addd"><a class="add" href="/admin/add">Thêm Sản Phẩm</a></div>
+    <br />
     <a href="/">List Home Sản Phẩm</a>
     <!-- <div>
       <br>
@@ -64,7 +64,6 @@
           <th>Xóa</th>
           <th>Sửa</th>
           <!-- <th>Giỏ Hàng</th> -->
-    
         </tr>
       </thead>
       <tbody>
@@ -93,7 +92,7 @@
           </td>
           <td>
             <Button class="btn-warning">
-              <router-link :to="`/${product.id}/edit`">
+              <router-link :to="`/admin/${product.id}/edit`">
                 <i class="bi bi-pencil"></i>
               </router-link>
             </Button>
@@ -108,20 +107,18 @@
 import axios from "axios";
 
 export default {
-
   computed: {
-  cartTotalQuantity() {
-    return this.cartList.reduce((total, item) => total + item.quantity, 0);
+    cartTotalQuantity() {
+      return this.cartList.reduce((total, item) => total + item.quantity, 0);
+    },
   },
-},
-
 
   data() {
     return {
-      isopen : false,
+      isopen: false,
       products: [],
       cart: [],
-      cartList:[],
+      cartList: [],
     };
   },
   mounted() {
@@ -129,7 +126,6 @@ export default {
     this.fetchCart();
   },
   methods: {
-
     async deleteCart(cartID) {
       try {
         const userConfirmed = window.confirm("Bạn có muốn xoá không ?");
@@ -153,68 +149,70 @@ export default {
       return (value || 0).toFixed(2);
     },
 
-        closeCartModal() {
-          this.isopen = false;
-        },
+    closeCartModal() {
+      this.isopen = false;
+    },
 
     open() {
-     // Lưu lại todo đang được sửa để cập nhật sau khi người dùng thay đổi thông tin
-   this.isopen = true;
-   },
-
+      // Lưu lại todo đang được sửa để cập nhật sau khi người dùng thay đổi thông tin
+      this.isopen = true;
+    },
 
     async updateProductInCart(products) {
-    try {
-      // Sử dụng axios.put để cập nhật thông tin cho sản phẩm cụ thể
-      await axios.put(`http://localhost:3000/cart/${products.id}`, products);
+      try {
+        // Sử dụng axios.put để cập nhật thông tin cho sản phẩm cụ thể
+        await axios.put(`http://localhost:3000/cart/${products.id}`, products);
 
-      console.log('Sản phẩm đã được cập nhật trong giỏ hàng:', products);
-    } catch (error) {
-      console.error('Lỗi khi cập nhật sản phẩm trong giỏ hàng:', error);
-    }
-  },
+        console.log("Sản phẩm đã được cập nhật trong giỏ hàng:", products);
+      } catch (error) {
+        console.error("Lỗi khi cập nhật sản phẩm trong giỏ hàng:", error);
+      }
+    },
 
-  async updateSoLuongCart(products) {
+    async updateSoLuongCart(products) {
+      products.quantity--;
 
-      products.quantity --;
-
-      if(products.quantity ==0){
+      if (products.quantity == 0) {
         this.deleteCart(products.id);
       }
 
-    try {
-      // Sử dụng axios.put để cập nhật thông tin cho sản phẩm cụ thể
-      await axios.put(`http://localhost:3000/cart/${products.id}`, products);
+      try {
+        // Sử dụng axios.put để cập nhật thông tin cho sản phẩm cụ thể
+        await axios.put(`http://localhost:3000/cart/${products.id}`, products);
 
-      console.log('Sản phẩm đã được cập nhật trong giỏ hàng:', products);
-    } catch (error) {
-      console.error('Lỗi khi cập nhật sản phẩm trong giỏ hàng:', error);
-    }
-  },
+        console.log("Sản phẩm đã được cập nhật trong giỏ hàng:", products);
+      } catch (error) {
+        console.error("Lỗi khi cập nhật sản phẩm trong giỏ hàng:", error);
+      }
+    },
 
-    // giỏ hàng 
-   async addToCart(products) {
-    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-    const existingProduct = this.cartList.find(item => item.id === products.id);
+    // giỏ hàng
+    async addToCart(products) {
+      // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+      const existingProduct = this.cartList.find(
+        (item) => item.id === products.id
+      );
 
-    if (existingProduct) {
-      // Nếu sản phẩm đã tồn tại, tăng số lượng
-      existingProduct.quantity++;
-      await this.updateProductInCart(existingProduct);
-    } else {
-    
-      // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
-  
-      const newProduct = {
-        id: products.id,
-        name: products.name,
-        price: products.price,
-        quantity: 1,
-      };
-      const response = await axios.post('http://localhost:3000/cart', newProduct);
-    }
-  },
-    // giỏ hàng 
+      if (existingProduct) {
+        // Nếu sản phẩm đã tồn tại, tăng số lượng
+        existingProduct.quantity++;
+        await this.updateProductInCart(existingProduct);
+      } else {
+        // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
+
+        const newProduct = {
+          id: products.id,
+          name: products.name,
+          price: products.price,
+          quantity: 1,
+        };
+        const response = await axios.post(
+          "http://localhost:3000/cart",
+          newProduct
+        );
+      }
+    },
+    // giỏ hàng
 
     async fetchCart() {
       try {

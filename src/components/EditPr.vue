@@ -3,73 +3,109 @@
     <a href="/">List Sản Phẩm</a>
     <div class="product-form">
       <h2>{{ isUpdating ? "Cập Nhật" : "Thêm" }} Sản Phẩm</h2>
-      <form @submit.prevent="submitForm">
-        <div class="form-group">
-          <label>Tên Sản Phẩm:</label>
-          <input type="text" v-model="productName" id="productName" required />
-        </div>
-
-        <div class="form-group">
-          <label>Ảnh Sản Phẩm:</label>
+      <form class="border p-5 bg-secondary" @submit.prevent="submitForm">
+        <div class="mb-3">
+          <label
+            for="exampleFormControlInput1"
+            class="form-label text-white fw-bold"
+            >Tên sản phẩm</label
+          >
           <input
             type="text"
+            class="form-control"
+            v-model="productName"
+            id="productName"
+            required
+            placeholder="Tên sản phẩm"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Ảnh sản phẩm</label
+          >
+          <input
+            type="text"
+            class="form-control"
             v-model="productImage"
             id="productImage"
             required
+            placeholder="Ảnh sản phẩm"
           />
         </div>
-
-        <div class="form-group">
-          <label>Mô Tả Sản Phẩm:</label>
-          <textarea
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Mô Tả Sản Phẩm:</label
+          >
+          <input
+            type="text"
+            class="form-control"
             v-model="productDescription"
             id="productDescription"
-            rows="3"
             required
-          ></textarea>
+            placeholder="Mô Tả Sản Phẩm:"
+          />
         </div>
-
-        <div class="form-group">
-          <label>Giá:</label>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Giá:</label
+          >
           <input
             type="number"
+            class="form-control"
             v-model="productPrice"
             id="productPrice"
             required
+            placeholder="Giá"
           />
         </div>
-
-        <div class="form-group">
-          <label>Stock:</label>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Cổ phần:</label
+          >
           <input
             type="text"
+            class="form-control"
             v-model="productStock"
             id="productStock"
             required
+            placeholder="Cổ phần"
           />
         </div>
-
-        <div class="form-group">
-          <label>Category:</label>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Loại vải:</label
+          >
           <input
             type="text"
+            class="form-control"
             v-model="productCategory"
             id="productCategory"
             required
+            placeholder="Loại vải"
           />
         </div>
-
-        <div class="form-group">
-          <label>Brand:</label>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-white"
+            >Thương hiệu:</label
+          >
           <input
             type="text"
+            class="form-control"
             v-model="productBrand"
             id="productBrand"
             required
+            placeholder="Thương hiệu"
           />
         </div>
 
-        <button type="submit">Cập nhật Sản Phẩm</button>
+        <div class="">
+          <button class="btn btn-primary me-5">
+            <a class="text-light" href="/admin/products">List Sản Phẩm</a>
+          </button>
+          <button type="submit" class="btn btn-success">
+            Cập nhật Sản Phẩm
+          </button>
+        </div>
       </form>
     </div>
   </div>
