@@ -61,7 +61,7 @@
             <a class="nav-link mx-2 text-uppercase" href="#">Catalog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 text-uppercase" href="#">Services</a>
+            <a class="nav-link mx-2 text-uppercase" v-on:click="logout" href="#">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mx-2 text-uppercase" href="#">About</a>

@@ -65,7 +65,7 @@
 <script>
 import axios from "axios";
 import Footer from "./footer.vue";
-import Nav from "./nav.vue";
+import Nav from "../components/Nav.vue"
 export default {
   components: {
     Nav,

@@ -21,24 +21,116 @@
       "brand": "Guccci"
     }
   ],
-  "user": [
+  "users": [
     {
-      "userName": "hoangcontien",
+      "name": "admin",
+      "email": "admin@gmail.com",
       "password": "123",
-      "email": "hieu@gmail.com"
+      "id": 1,
+      "role": "admin"
     },
     {
-      "userName": "admin",
+      "email": "t@gmail.com",
       "password": "123",
-      "email": "quyet@gmail.com"
+      "name": "thang",
+      "id": 2
     },
     {
-      "userName": "kamisato ayaka",
+      "email": "x@gmail.com",
       "password": "123",
-      "email": "thang@gmail.com"
+      "name": "x",
+      "id": 3
+    },
+    {
+      "email": "x@gmail.com",
+      "password": "123",
+      "name": "x",
+      "id": 4
+    },
+    {
+      "email": "c@gmail.com",
+      "password": "123",
+      "name": "c",
+      "id": 5
+    },
+    {
+      "email": "c@gmail.com",
+      "password": "123",
+      "name": "c",
+      "id": 6
+    },
+    {
+      "email": "f@gmail.com",
+      "password": "1234",
+      "name": "fdasđsds",
+      "id": 7
+    },
+    {
+      "email": "v@gmail.com",
+      "password": "123",
+      "name": "v",
+      "id": 8
+    },
+    {
+      "email": "v@gmail.com",
+      "password": "123",
+      "name": "v",
+      "id": 9
+    },
+    {
+      "email": "ss@gmail.com",
+      "password": "ss",
+      "name": "ss",
+      "id": 10
+    },
+    {
+      "email": "ss@gmail.com",
+      "password": "ss",
+      "name": "ss",
+      "id": 11
+    },
+    {
+      "email": "ss@gmail.com",
+      "password": "ss",
+      "name": "ss",
+      "id": 12
+    },
+    {
+      "email": "ss@gmail.com",
+      "password": "ss",
+      "name": "ss",
+      "id": 13
+    },
+    {
+      "email": "f@gmail.com",
+      "password": "123",
+      "name": "f",
+      "id": 14
+    },
+    {
+      "email": "h@gmail.com",
+      "password": "123",
+      "name": "h",
+      "id": 15
+    },
+    {
+      "email": "g@gmail.com",
+      "password": "123",
+      "name": "g",
+      "id": 16
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "123",
+      "name": "a",
+      "id": 17
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "123",
+      "name": "aa",
+      "id": 18
     }
   ],
-
   "cart": []
-
 }

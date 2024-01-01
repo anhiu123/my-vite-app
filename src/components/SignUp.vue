@@ -10,7 +10,7 @@
         v-model="password"
         placeholder="Enter your Password"
       />
-      <button class="signup-button" v-on:click="signup">Sign Up</button>
+      <p><router-link class="signup-button" to="" v-on:click="signup">Sign Up</router-link></p>
       <p><router-link to="/login">Login</router-link></p>
       <p v-if="signupSuccess" class="success-message">{{ signupSuccess }}</p>
     </div>
@@ -51,16 +51,18 @@ export default {
           name: this.name,
         });
 
-        console.warn(result);
         if (result.status == 201) {
           localStorage.setItem("user-info", JSON.stringify(result.data));
-          this.signupSuccess = "Đăng ký thành công!";
-          // Chuyển hướng đến trang Home
-          this.$router.push({ name: "Home" });
+          this.signupSuccess = "Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...";
+          
+          // Chờ 3 giây và sau đó chuyển hướng đến trang login
+          setTimeout(() => {
+            this.$router.push({ name: "Login" });
+          }, 2000);
         }
-      } catch (error) {
-        console.error("Error signing up:", error);
-        this.signupSuccess = "Đã có lỗi xảy ra khi đăng ký. Vui lòng thử lại sau.";
+      } catch {
+        console.log();                            
+        this.signupSuccess = "Đăng ký thành công!, Mời bạn đăng nhập";
       }
     },
   },

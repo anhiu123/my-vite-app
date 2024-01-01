@@ -44,29 +44,36 @@ export default {
         this.loginError = "Định dạng email không hợp lệ.";
         return;
       }
-   //   this.$router.push({ name: "Home" });
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/user?email=${this.email}&password=${this.password}`
-        );
 
-        if (response.status === 200 && response.data.length > 0) {
-          localStorage.setItem("user-info", JSON.stringify(response.data[0]));
-          this.isLoggedIn = true;
-          this.loginError = ""; // Đặt lại lỗi nếu có
-          // Chuyển hướng đến trang Home
-          this.$router.push({ name: "Home" });
-        } else {
-          this.isLoggedIn = false;
-          this.loginError = "Tài khoản không tồn tại. Vui lòng kiểm tra lại thông tin đăng nhập.";
-        }
+try {
+  const response = await axios.get(
+    `http://localhost:3000/users?email=${this.email}&password=${this.password}`
+  );
 
-        console.log(response);
-      } catch (error) {
-        console.error("Error logging in:", error);
-        this.isLoggedIn = false;
-        this.loginError = "Đã có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.";
-      }
+  if (response.status === 200 && response.data.length > 0) {
+    const user = response.data[0];
+
+    // Lưu thông tin người dùng và quyền vào local storage
+    localStorage.setItem("user-info", JSON.stringify(user));
+
+    // Chuyển hướng người dùng đến trang tương ứng
+    if (user.role === "admin") {
+      this.$router.push({ name: "AdminDashboard" });
+    } else {
+      this.$router.push({ name: "UserDashboard" });
+    }
+
+    this.isLoggedIn = true;
+    this.loginError = ""; // Đặt lại lỗi nếu có
+  } else {
+    this.isLoggedIn = false;
+    this.loginError = "Tài khoản không tồn tại. Vui lòng kiểm tra lại thông tin đăng nhập.";
+  }
+} catch (error) {
+  console.error("Error logging in:", error);
+  this.isLoggedIn = false;
+  this.loginError = "Đã có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.";
+}
     },
   },
 };
