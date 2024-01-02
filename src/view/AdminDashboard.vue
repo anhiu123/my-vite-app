@@ -1,106 +1,64 @@
 <template>
-  <!-- Your HTML template goes here -->
-  <div>
-    <h2>Ứng Dụng Bán Quần Áo</h2>
+    <!-- Your HTML template goes here -->
+    <div>
+      <h2>Ứng Dụng Bán Quần Áo</h2>
+  
+      <div class="addd"><a class="add" href="/admin/add">Thêm Sản Phẩm</a></div>
+      <br />
+      <a href="/">List Home Sản Phẩm</a>
 
-    <div class="addd"><a class="add" href="/admin/add">Thêm Sản Phẩm</a></div>
-    <br />
-    <a href="/">List Home Sản Phẩm</a>
-    <!-- <div>
-      <br>
-      <Button @click="open()"
-              ><i class="bi bi-cart"></i>
-            
-            </Button>
-            <h2 style="margin-top: -40px;margin-left: 80px;"> {{ cartTotalQuantity }}</h2>
-
-            <div v-if="isopen">
-  <table style="justify-content: center;align-items: center;">
-    <thead>
-      <tr>
-        <th>Tên</th>
-        <th>Số Lượng</th>
-        <th>Giá</th>
-        <th>Thành Tiền</th>
-        <th>Xóa</th>
-        <th>Giảm Số Lượng</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in cartList" :key="item.id">
-        <td>{{ item.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ formatPrice(item.price * item.quantity) }}</td>
-        <td>
-            <Button  class="xoa" @click="deleteCart(item.id)"
-              ><i class="bi bi-trash"></i
-            ></Button>
-          </td>
-          <td>
-            <Button @click="updateSoLuongCart(item)"
-              ><i class="bi bi-dash "></i
-            ></Button>
-          </td>
-      </tr>
-    </tbody>
-  </table>
-  <button @click="closeCartModal"><i class="bi bi-close"></i>Đóng</button>
-</div>
-  </div> -->
-
-    <table>
-      <thead>
-        <tr class="bg-body-secondary">
-          <th>ID</th>
-
-          <th>Tên</th>
-          <th>Ảnh</th>
-          <th>Tiêu đề</th>
-          <th>Giá</th>
-          <th>Cổ phần</th>
-          <th>Loại</th>
-          <th>thương hiệu</th>
-          <th>Xóa</th>
-          <th>Sửa</th>
-          <!-- <th>Giỏ Hàng</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in products" :key="product.id">
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <td>
-            <img
-              style="width: 100px; height: 100px"
-              :src="product.img"
-              alt=""
-            />
-          </td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.stock }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.brand }}</td>
-          <!-- <td>
-<button @click="addToCart(product)">Thêm vào giỏ hàng</button>
-</td> -->
-          <td>
-            <Button class="xoa" @click="deleteProduct(product.id)"
-              ><i class="bi bi-trash"></i
-            ></Button>
-          </td>
-          <td>
-            <Button class="btn-warning">
-              <router-link :to="`/admin/${product.id}/edit`">
-                <i class="bi bi-pencil"></i>
-              </router-link>
-            </Button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <table>
+        <thead>
+          <tr class="bg-body-secondary">
+            <th>ID</th>
+  
+            <th>Tên</th>
+            <th>Ảnh</th>
+            <th>Tiêu đề</th>
+            <th>Giá</th>
+            <th>Cổ phần</th>
+            <th>Loại</th>
+            <th>thương hiệu</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+            <!-- <th>Giỏ Hàng</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in products" :key="product.id">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>
+              <img
+                style="width: 100px; height: 100px"
+                :src="product.img"
+                alt=""
+              />
+            </td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.brand }}</td>
+            <!-- <td>
+  <button @click="addToCart(product)">Thêm vào giỏ hàng</button>
+  </td> -->
+            <td>
+              <Button class="xoa" @click="deleteProduct(product.id)"
+                ><i class="bi bi-trash"></i
+              ></Button>
+            </td>
+            <td>
+              <Button class="btn-warning">
+                <router-link :to="`/admin/${product.id}/edit`">
+                  <i class="bi bi-pencil"></i>
+                </router-link>
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </template>
 
 <script>
@@ -206,8 +164,7 @@ export default {
           price: products.price,
           quantity: 1,
         };
-        const response = await axios.post(
-          "http://localhost:3000/cart",
+        const response = await axios.post("http://localhost:3000/cart",
           newProduct
         );
       }

@@ -4,7 +4,7 @@
   >
     <div class="container">
       <a class="navbar-brand" href="#"
-        ><i class="fa-solid fa-shop me-2"></i> <strong>GEAR SHOP</strong></a
+        ><i class="fa-solid fa-shop me-2" href="/"></i> <strong>GEAR SHOP</strong></a
       >
       <button
         class="navbar-toggler"
@@ -75,10 +75,15 @@
             <a class="nav-link mx-2 text-uppercase" href="#">Catalog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 text-uppercase" href="#">Services</a>
+            <a class="nav-link mx-2 text-uppercase" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 text-uppercase" href="#">About</a>
+            <a
+              class="nav-link mx-2 text-uppercase"
+              v-on:click="logout"
+              href="login"
+              >Logout</a
+            >
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -92,7 +97,7 @@
             </div>
           </li>
           <li class="nav-item d-flex align-items-center justify-content-center">
-            <a class="nav-link mx-2 text-uppercase" href="#"
+            <a class="nav-link mx-2 text-uppercase" href="/login"
               ><i class="bi bi-person"></i>Account</a
             >
           </li>
@@ -100,14 +105,19 @@
       </div>
     </div>
   </nav>
-  <div v-if="isopen">
-    <section class="vh-100" style="background-color: #fdccbc">
+  <div
+    v-if="isopen"
+    class="cart1 z-1 position-absolute start-50 translate-middle sticky-top"
+  >
+    <section class="cart vh-100">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col">
+          <div class="col bg-warning">
             <p>
               <span class="h2">Shopping Cart </span
-              ><span class="h4">(1 item in your cart)</span>
+              ><span class="h4"
+                >({{ cartTotalQuantity }} item in your cart)</span
+              >
             </p>
 
             <div class="card mb-4">
@@ -174,19 +184,21 @@
                       formatPriceVND(orderTotal)
                     }}</span>
                   </p>
+                  <br />
+                  <div class="d-flex justify-content-end">
+                    <button
+                      @click="closeCartModal"
+                      type="button"
+                      class="btn btn-danger me-2"
+                    >
+                      Đóng
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                      Mua
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="d-flex justify-content-end">
-              <button
-                @click="closeCartModal"
-                type="button"
-                class="btn btn-light btn-lg me-2"
-              >
-                Đóng
-              </button>
-              <button type="button" class="btn btn-primary btn-lg">Mua</button>
             </div>
           </div>
         </div>
@@ -194,7 +206,6 @@
     </section>
   </div>
   <h2>Sản Phẩm</h2>
-  <a href="admin/products">Thêm Sản Phẩm</a>
   <div class="d-flex flex-wrap">
     <div
       class="d-flex flex-row mb-3 p-1"
@@ -219,7 +230,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">
-            {{ product.price }}
+            {{ formatPriceVND(product.price) }}
           </p>
           <!-- <a href="#" class="btn btn-primary">Add to card</a> -->
         </div>
@@ -239,10 +250,17 @@
 <script>
 import axios from "axios";
 
-import Footer from "./footer.vue";
+import Footer from "../components/footer.vue";
 import _ from "lodash";
-// import { BButton } from "bootstrap-vue";
 export default {
+  name: "UserDashboard",
+  methods: {
+    logout() {
+      console.log("Đã gọi hàm logout");
+      localStorage.clear();
+      this.$router.push({ name: "Login" });
+    },
+  },
   components: {
     Footer,
   },
@@ -344,12 +362,7 @@ export default {
         const filteredProducts = this.products.filter((product) =>
           product.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
         );
-
-        if (filteredProducts.length > 0) {
-          this.products = [filteredProducts[0]];
-        } else {
-          this.products = [];
-        }
+        this.products = filteredProducts;
       } else {
         this.fetchProducts();
       }
@@ -457,7 +470,12 @@ td {
   border-radius: 4px;
   color: black;
 }
-
+.cart {
+  width: 1000px;
+}
+.cart1 {
+  top: 540px;
+}
 .xoa {
   background-color: red;
 }
