@@ -5,45 +5,40 @@
       "name": "áo55555",
       "img": "https://bizweb.dktcdn.net/100/415/697/products/ahu2keci-1-iirh-hinh-mat-truoc-01.jpg?v=1657108771117",
       "description": "Thành phần vải: 100% Cotton Kiểu dáng áo thun phom suông năng độngCổ tròn, tay ngắn đơn giảnThiết kế lấy cảm hứng từ hiệp hội bóng chày MLBHọa tiết ...",
-      "price": "1000000",
+      "price": 10000003,
       "stock": "100",
       "category": "Áo",
       "brand": "Vải"
     },
     {
+      "id": "WmuobhH",
       "name": "Quần Gucci",
       "price": 500000,
       "description": "đẹp vãi bìu ",
       "img": "https://tse1.mm.bing.net/th?id=OIP.BZUa01vCbqBlgOzk430yUAHaHa&pid=Api&P=0&h=180",
       "stock": "dsdf",
       "category": "sdfsdf",
-      "brand": "Guccci",
-      "id": "WmuobhH"
+      "brand": "Guccci"
     }
   ],
   "user": [
     {
       "userName": "hoangcontien",
-      "password": "<PASSWORD>",
-      "email": "<EMAIL>"
+      "password": "123",
+      "email": "hieu@gmail.com"
     },
     {
       "userName": "admin",
-      "password": "<PASSWORD>",
-      "email": "<EMAIL>"
+      "password": "123",
+      "email": "quyet@gmail.com"
     },
     {
       "userName": "kamisato ayaka",
-      "password": "<PASSWORD>",
-      "email": "<EMAIL>"
+      "password": "123",
+      "email": "thang@gmail.com"
     }
   ],
-  "cart": [
-    {
-      "id": "1",
-      "name": "áo55555",
-      "price": "1000000",
-      "quantity": 1
-    }
-  ]
+
+  "cart": []
+
 }

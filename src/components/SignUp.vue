@@ -1,80 +1,76 @@
 <template>
   <div class="signup-container">
     <img class="logo" src="../assets/bali, vietnam (2).png" alt="Logo" />
-    <h1 class="h1">Login</h1>
+    <h1 class="h1">Sign Up</h1>
     <div class="register">
+      <input type="text" v-model="name" placeholder="Enter your Name" />
       <input type="text" v-model="email" placeholder="Enter your Email" />
       <input
         type="password"
         v-model="password"
         placeholder="Enter your Password"
       />
-      <button class="signup-button" @click="logIn">Login</button>
-      <p><router-link to="/signup">Sign Up</router-link></p>
-      <p v-if="loginError" class="error-message">{{ loginError }}</p>
-      <p v-if="isLoggedIn">Đăng nhập thành công!</p>
+      <button class="signup-button" v-on:click="signup">Sign Up</button>
+      <p><router-link to="/login">Login</router-link></p>
+      <p v-if="signupSuccess" class="success-message">{{ signupSuccess }}</p>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
-  name: "Login",
+  name: "SignUp",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
-      isLoggedIn: false,
-      loginError: "",
+      signupSuccess: "",
     };
   },
   methods: {
-    async logIn() {
-      // Kiểm tra email và mật khẩu không được để trống
-      if (!this.email || !this.password) {
-        this.loginError = "Vui lòng nhập đầy đủ email và mật khẩu.";
+    async signup() {
+      // Kiểm tra tên, email và mật khẩu không được để trống
+      if (!this.name || !this.email || !this.password) {
+        this.signupSuccess = "Vui lòng nhập đầy đủ thông tin.";
         return;
       }
 
       // Kiểm tra định dạng email sử dụng biểu thức chính quy
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(this.email)) {
-        this.loginError = "Định dạng email không hợp lệ.";
+        this.signupSuccess = "Định dạng email không hợp lệ.";
         return;
       }
-   //   this.$router.push({ name: "Home" });
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/user?email=${this.email}&password=${this.password}`
-        );
 
-        if (response.status === 200 && response.data.length > 0) {
-          localStorage.setItem("user-info", JSON.stringify(response.data[0]));
-          this.isLoggedIn = true;
-          this.loginError = ""; // Đặt lại lỗi nếu có
+      try {
+        let result = await axios.post("http://localhost:3000/users", {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+        });
+
+        console.warn(result);
+        if (result.status == 201) {
+          localStorage.setItem("user-info", JSON.stringify(result.data));
+          this.signupSuccess = "Đăng ký thành công!";
           // Chuyển hướng đến trang Home
           this.$router.push({ name: "Home" });
-        } else {
-          this.isLoggedIn = false;
-          this.loginError = "Tài khoản không tồn tại. Vui lòng kiểm tra lại thông tin đăng nhập.";
         }
-
-        console.log(response);
       } catch (error) {
-        console.error("Error logging in:", error);
-        this.isLoggedIn = false;
-        this.loginError = "Đã có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.";
+        console.error("Error signing up:", error);
+        this.signupSuccess = "Đã có lỗi xảy ra khi đăng ký. Vui lòng thử lại sau.";
       }
     },
   },
+  
 };
 </script>
 
 <style scoped>
-.error-message {
-  color: red;
+.success-message {
+  color: green;
   margin-top: 10px;
 }
 .signup-container {
